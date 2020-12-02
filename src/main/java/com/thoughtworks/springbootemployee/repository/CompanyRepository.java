@@ -16,6 +16,7 @@ public class CompanyRepository {
     }
 
     public Company create(Company company) {
-        return null;
+        this.companyList.add(company);
+        return company;
     }
 }
