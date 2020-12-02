@@ -24,6 +24,14 @@ public class EmployeeRepository {
     }
 
     public Employee update(Integer employeeId, Employee employeeUpdate) {
-        return null;
+        this.employeeList.stream()
+            .filter(employee -> employeeId.equals(employee.getId()))
+            .findFirst()
+            .ifPresent(employee -> {
+                this.employeeList.remove(employee);
+                this.employeeList.add(employeeUpdate);
+            });
+
+        return employeeUpdate;
     }
 }
