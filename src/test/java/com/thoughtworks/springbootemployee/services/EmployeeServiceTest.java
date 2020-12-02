@@ -33,7 +33,7 @@ class EmployeeServiceTest {
         EmployeeRepository employeeRepository = Mockito.mock(EmployeeRepository.class);
         EmployeeService employeeService = new EmployeeService(employeeRepository);
         Employee expected = new Employee();
-        when(employeeRepository.create()).thenReturn(expected);
+        when(employeeRepository.create(expected)).thenReturn(expected);
 
         //when
         Employee actual = employeeService.create(expected);

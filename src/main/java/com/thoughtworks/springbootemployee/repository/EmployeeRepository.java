@@ -14,7 +14,7 @@ public class EmployeeRepository {
         return employeeList;
     }
 
-    public Employee create() {
+    public Employee create(Employee employee) {
         return null;
     }
 }
