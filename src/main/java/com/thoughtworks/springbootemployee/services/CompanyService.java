@@ -34,4 +34,8 @@ public class CompanyService {
     public List<Company> findAll(int page, int pageSize) {
         return this.companyRepository.findAll(page, pageSize);
     }
+
+    public Company update(Integer companyId, Company companyUpdate) {
+        return this.companyRepository.update(companyId, companyUpdate);
+    }
 }

@@ -3,6 +3,7 @@ package com.thoughtworks.springbootemployee.services;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -112,6 +113,21 @@ class CompanyServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void should_return_correct_company_details_when_update_given_repository_and_employee() {
+        //given
+        CompanyRepository companyRepository = new CompanyRepository();
+        CompanyService companyService = new CompanyService(companyRepository);
+        Company init = new Company(1, "ABC Company", 22, new ArrayList<>());
+
+        Company expected = new Company(1, "XYZ Company", 22, new ArrayList<>());
+
+        //when
+        Company actual = companyService.update(init.getCompanyId(), expected);
+
+        //then
+        assertEquals(expected, actual);
+    }
 
 
 }
