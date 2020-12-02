@@ -45,16 +45,13 @@ public class EmployeeController {
     public Employee update(@PathVariable Integer employeeId, @RequestBody Employee employeeUpdate) {
         return this.employeeService.update(employeeId, employeeUpdate);
     }
-//
-//    @DeleteMapping("/{employeeId}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void delete(@PathVariable Integer employeeId) {
-//        this.employeeList.stream()
-//            .filter(employee -> employeeId.equals(employee.getId()))
-//            .findFirst()
-//            .ifPresent(employee -> this.employeeList.remove(employee));
-//    }
-//
+
+    @DeleteMapping("/{employeeId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Integer employeeId) {
+        this.employeeService.delete(employeeId);
+    }
+
     @GetMapping("/{employeeId}")
     public Employee findEmployee(@PathVariable Integer employeeId) {
         return this.employeeService.findEmployee(employeeId);

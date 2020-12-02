@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
 public class EmployeeRepository {
     private List<Employee> employeeList = new ArrayList<>();
 
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
     public List<Employee> findAll() {
         return this.employeeList;
     }
@@ -49,5 +53,9 @@ public class EmployeeRepository {
             });
 
         return employeeUpdate;
+    }
+
+    public void delete(Integer employeeId) {
+
     }
 }

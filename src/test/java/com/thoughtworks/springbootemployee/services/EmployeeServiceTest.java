@@ -120,5 +120,22 @@ class EmployeeServiceTest {
         //then
         assertEquals(expected, actual);
     }
+    
+    @Test
+    public void should_delete_successfully_when_delete_given_repository_and_employee_list() {
+        //given
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        EmployeeService employeeService = new EmployeeService(employeeRepository);
+        Employee init = new Employee();
+        init.setId(1);
+        employeeService.create(init);
+
+        //when
+        employeeService.delete(init.getId());
+        
+        //then
+        assertEquals(0, employeeRepository.getEmployeeList().size());
+    }
+    
 
 }
