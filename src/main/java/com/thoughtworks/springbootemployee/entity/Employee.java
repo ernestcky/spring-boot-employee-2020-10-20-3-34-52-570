@@ -29,4 +29,16 @@ public class Employee {
     public String getGender() {
         return gender;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public Integer getSalary() {
+        return salary;
+    }
 }
