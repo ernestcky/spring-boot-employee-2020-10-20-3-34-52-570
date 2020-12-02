@@ -95,11 +95,11 @@ class CompanyServiceTest {
         CompanyRepository companyRepository = new CompanyRepository();
         CompanyService companyService = new CompanyService(companyRepository);
         List<Company> init = Arrays.asList(
-                new Company(),
-                new Company(),
-                new Company(),
-                new Company(),
-                new Company()
+                new Company(1, null, null, null),
+                new Company(2, null, null, null),
+                new Company(3, null, null, null),
+                new Company(4, null, null, null),
+                new Company(5, null, null, null)
         );
 
         List<Company> expected = init.stream().filter(employee -> employee.getCompanyId().equals(3) || employee.getCompanyId().equals(4)).collect(Collectors.toList());

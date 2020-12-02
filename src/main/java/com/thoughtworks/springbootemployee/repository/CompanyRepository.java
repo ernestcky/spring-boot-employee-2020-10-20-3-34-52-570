@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CompanyRepository {
@@ -16,7 +17,12 @@ public class CompanyRepository {
     }
 
     public List<Company> findAll(Integer page, Integer pageSize) {
-        return null;
+        int pageToSkip = page - 1;
+
+        return this.companyList.stream()
+                .skip(pageToSkip * pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList());
     }
 
     public Company create(Company company) {

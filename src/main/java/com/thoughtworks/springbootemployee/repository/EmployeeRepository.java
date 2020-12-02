@@ -27,7 +27,7 @@ public class EmployeeRepository {
     public List<Employee> findAll(Integer page, Integer pageSize) {
         int pageToSkip = page - 1;
 
-        return employeeList.stream()
+        return this.employeeList.stream()
             .skip(pageToSkip * pageSize)
             .limit(pageSize)
             .collect(Collectors.toList());
