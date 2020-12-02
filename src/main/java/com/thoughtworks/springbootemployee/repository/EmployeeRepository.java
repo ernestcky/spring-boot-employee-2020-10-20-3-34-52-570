@@ -18,4 +18,8 @@ public class EmployeeRepository {
         this.employeeList.add(employee);
         return employee;
     }
+
+    public Employee findEmployee(Integer employeeId) {
+        return null;
+    }
 }

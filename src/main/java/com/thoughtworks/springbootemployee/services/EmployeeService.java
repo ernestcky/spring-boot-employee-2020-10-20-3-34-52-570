@@ -23,4 +23,8 @@ public class EmployeeService {
     public Employee create(Employee employee) {
         return this.employeeRepository.create(employee);
     }
+
+    public Employee findEmployee(Integer employeeId) {
+        return null;
+    }
 }
