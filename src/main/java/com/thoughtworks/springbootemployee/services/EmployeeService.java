@@ -25,6 +25,6 @@ public class EmployeeService {
     }
 
     public Employee findEmployee(Integer employeeId) {
-        return null;
+        return this.employeeRepository.findEmployee(employeeId);
     }
 }
