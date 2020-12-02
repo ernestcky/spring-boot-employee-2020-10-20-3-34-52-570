@@ -11,10 +11,11 @@ public class EmployeeRepository {
     private List<Employee> employeeList = new ArrayList<>();
 
     public List<Employee> findAll() {
-        return employeeList;
+        return this.employeeList;
     }
 
     public Employee create(Employee employee) {
-        return null;
+        this.employeeList.add(employee);
+        return employee;
     }
 }
