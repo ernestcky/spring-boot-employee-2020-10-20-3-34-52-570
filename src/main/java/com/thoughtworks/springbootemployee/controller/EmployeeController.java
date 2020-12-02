@@ -43,24 +43,16 @@ public class EmployeeController {
 //            .filter(employee -> gender.equals(employee.getGender()))
 //            .collect(Collectors.toList());
 //    }
-//
+
     @PostMapping
     public Employee create(@RequestBody Employee employee) {
         return this.employeeService.create(employee);
     }
-//
-//    @PutMapping("/{employeeId}")
-//    public Employee update(@PathVariable Integer employeeId, @RequestBody Employee employeeUpdate) {
-//        this.employeeList.stream()
-//            .filter(employee -> employeeId.equals(employee.getId()))
-//            .findFirst()
-//            .ifPresent(employee -> {
-//                this.employeeList.remove(employee);
-//                this.employeeList.add(employeeUpdate);
-//            });
-//
-//        return employeeUpdate;
-//    }
+
+    @PutMapping("/{employeeId}")
+    public Employee update(@PathVariable Integer employeeId, @RequestBody Employee employeeUpdate) {
+        return this.employeeService.update(employeeId, employeeUpdate);
+    }
 //
 //    @DeleteMapping("/{employeeId}")
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
