@@ -34,4 +34,12 @@ public class CompanyController {
         return this.companyService.getCompanyEmployees(companyId);
     }
 
+    @GetMapping(params = {
+            "page",
+            "pageSize"
+    })
+    public List<Company> getAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
+        return this.companyService.findAll(page, pageSize);
+    }
+
 }
