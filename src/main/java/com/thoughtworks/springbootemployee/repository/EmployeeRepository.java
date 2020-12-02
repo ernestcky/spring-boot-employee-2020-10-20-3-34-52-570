@@ -22,7 +22,12 @@ public class EmployeeRepository {
     }
 
     public List<Employee> findAll(Integer page, Integer pageSize) {
-        return null;
+        int pageToSkip = page - 1;
+
+        return employeeList.stream()
+            .skip(pageToSkip * pageSize)
+            .limit(pageSize)
+            .collect(Collectors.toList());
     }
 
     public Employee create(Employee employee) {
