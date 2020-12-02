@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class EmployeeRepository {
@@ -12,6 +13,10 @@ public class EmployeeRepository {
 
     public List<Employee> findAll() {
         return this.employeeList;
+    }
+
+    public List<Employee> findAll(String gender) {
+        return null;
     }
 
     public Employee create(Employee employee) {

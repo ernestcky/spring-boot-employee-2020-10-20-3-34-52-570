@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -42,7 +43,7 @@ class EmployeeServiceTest {
         //then
         assertEquals(expected, actual);
     }
-    
+
     @Test
     public void should_return_correct_employee_when_get_employee_by_id_given_repository_and_employee_request() {
         //given
@@ -52,7 +53,7 @@ class EmployeeServiceTest {
         expected.setId(1);
 
         when(employeeRepository.findEmployee(expected.getId())).thenReturn(expected);
-                
+
         //when
         employeeService.create(expected);
         Employee actual = employeeService.findEmployee(1);
@@ -70,7 +71,6 @@ class EmployeeServiceTest {
 
         Employee expected = new Employee(1, "Ernest", 23, "M", 10000);
 
-
         //when
         Employee actual = employeeService.update(init.getId(), expected);
 
@@ -78,6 +78,24 @@ class EmployeeServiceTest {
         assertEquals(expected, actual);
     }
 
-    
+    @Test
+    public void should_return_female_employ_when_get_by_gender_given_param_is_male() {
+        //given
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        EmployeeService employeeService = new EmployeeService(employeeRepository);
+        List<Employee> init = Arrays.asList(
+                new Employee(null, null, null, "F", null),
+                new Employee(null, null, null, "M", null),
+                new Employee(null, null, null, "F", null)
+        );
+        List<Employee> expected = init.stream().filter(employee -> employee.getGender().equals("F")).collect(Collectors.toList());
+
+        //when
+        init.stream().forEach(employee -> employeeService.create(employee));
+        List<Employee> actual = employeeService.getAll("F");
+
+        //then
+        assertEquals(expected, actual);
+    }
 
 }

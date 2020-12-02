@@ -20,6 +20,10 @@ public class EmployeeService {
         return this.employeeRepository.findAll();
     }
 
+    public List<Employee> getAll(String gender) {
+        return this.employeeRepository.findAll(gender);
+    }
+
     public Employee create(Employee employee) {
         return this.employeeRepository.create(employee);
     }
