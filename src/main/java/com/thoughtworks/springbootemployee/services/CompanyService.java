@@ -27,7 +27,7 @@ public class CompanyService {
         return this.companyRepository.getCompany(companyId);
     }
 
-    public Company getCompanyEmployees(Integer companyId) {
-        return null;
+    public List<Employee> getCompanyEmployees(Integer companyId) {
+        return this.companyRepository.getCompanyEmployees(companyId);
     }
 }

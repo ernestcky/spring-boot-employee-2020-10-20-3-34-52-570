@@ -82,7 +82,7 @@ class CompanyServiceTest {
 
         //when
         companyService.create(company);
-        Company actual = companyService.getCompanyEmployees(company.getCompanyId());
+        List<Employee> actual = companyService.getCompanyEmployees(company.getCompanyId());
 
         //then
         assertEquals(expected, actual);
