@@ -3,13 +3,13 @@ package com.thoughtworks.springbootemployee.entity;
 import java.util.List;
 
 public class Company {
-    private Integer id;
+    private Integer companyId;
     private String companyName;
     private Integer employeesNumber;
     private List<Employee> employees;
 
-    public Integer getId() {
-        return id;
+    public Integer getCompanyId() {
+        return companyId;
     }
 
     public String getCompanyName() {

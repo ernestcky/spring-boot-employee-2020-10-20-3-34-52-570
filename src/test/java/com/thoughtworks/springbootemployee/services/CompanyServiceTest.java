@@ -54,11 +54,11 @@ class CompanyServiceTest {
 
         Company expected = new Company();
 
-        when(companyRepository.getCompany(expected.getId())).thenReturn(expected);
+        when(companyRepository.getCompany(expected.getCompanyId())).thenReturn(expected);
 
         //when
         companyService.create(expected);
-        Company actual = companyService.getCompany(expected.getId());
+        Company actual = companyService.getCompany(expected.getCompanyId());
 
         //then
         assertEquals(expected, actual);

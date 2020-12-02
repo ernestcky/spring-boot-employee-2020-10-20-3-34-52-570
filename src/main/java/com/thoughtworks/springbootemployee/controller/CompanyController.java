@@ -24,4 +24,9 @@ public class CompanyController {
         return this.companyService.create(company);
     }
 
+    @GetMapping("/{companyId}")
+    public Company getCompany(@PathVariable Integer companyId) {
+        return this.companyService.getCompany(companyId);
+    }
+
 }
