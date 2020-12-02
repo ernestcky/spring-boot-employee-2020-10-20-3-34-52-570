@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 public class CompanyRepository {
     private List<Company> companyList = new ArrayList<>();
 
+    public List<Company> getCompanyList() {
+        return companyList;
+    }
+
     public List<Company> findAll() {
         return this.companyList;
     }
@@ -48,5 +52,8 @@ public class CompanyRepository {
                 });
 
         return companyUpdate;
+    }
+
+    public void delete(Integer companyId) {
     }
 }

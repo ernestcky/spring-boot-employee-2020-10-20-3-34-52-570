@@ -129,5 +129,20 @@ class CompanyServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void should_delete_successfully_when_delete_given_repository_and_company_list() {
+        //given
+        CompanyRepository companyRepository = new CompanyRepository();
+        CompanyService companyService = new CompanyService(companyRepository);
+        Company init = new Company();
+        init.setCompanyId(1);
+        companyService.create(init);
+
+        //when
+        companyService.delete(init.getCompanyId());
+
+        //then
+        assertEquals(0, companyRepository.getCompanyList().size());
+    }
 
 }

@@ -38,4 +38,8 @@ public class CompanyService {
     public Company update(Integer companyId, Company companyUpdate) {
         return this.companyRepository.update(companyId, companyUpdate);
     }
+
+    public void delete(Integer companyId) {
+        this.companyRepository.delete(companyId);
+    }
 }
