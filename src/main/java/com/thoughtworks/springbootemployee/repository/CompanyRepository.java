@@ -19,4 +19,8 @@ public class CompanyRepository {
         this.companyList.add(company);
         return company;
     }
+
+    public Company getCompany(Integer companyId) {
+        return null;
+    }
 }

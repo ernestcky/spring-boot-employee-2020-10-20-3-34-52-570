@@ -46,5 +46,24 @@ class CompanyServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void should_return_specified_company_when_get_given_repository_and_id() {
+        //given
+        CompanyRepository companyRepository = Mockito.mock(CompanyRepository.class);
+        CompanyService companyService = new CompanyService(companyRepository);
+
+        Company expected = new Company();
+
+        when(companyRepository.getCompany(expected.getId())).thenReturn(expected);
+
+        //when
+        companyService.create(expected);
+        Company actual = companyService.getCompany(expected.getId());
+
+        //then
+        assertEquals(expected, actual);
+    }
+
+
 
 }
