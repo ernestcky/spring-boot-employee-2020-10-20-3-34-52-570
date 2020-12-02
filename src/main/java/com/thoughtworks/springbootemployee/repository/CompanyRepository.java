@@ -55,5 +55,9 @@ public class CompanyRepository {
     }
 
     public void delete(Integer companyId) {
+        this.companyList.stream()
+                .filter(company -> companyId.equals(company.getCompanyId()))
+                .findFirst()
+                .ifPresent(employee -> this.companyList.remove(employee));
     }
 }
