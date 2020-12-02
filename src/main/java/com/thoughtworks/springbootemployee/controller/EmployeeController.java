@@ -21,20 +21,14 @@ public class EmployeeController {
         return this.employeeService.getAll();
     }
 
-//    @GetMapping(params = {
-//        "page",
-//        "pageSize"
-//    })
-//    public List<Employee> getAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
-//        int pageToSkip = page - 1;
-//        int numberOfEmployeesToSkip = pageToSkip * pageSize;
-//
-//        return employeeList.stream()
-//            .skip(numberOfEmployeesToSkip)
-//            .limit(pageSize)
-//            .collect(Collectors.toList());
-//    }
-//
+    @GetMapping(params = {
+        "page",
+        "pageSize"
+    })
+    public List<Employee> getAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
+        return this.employeeService.getAll(page, pageSize);
+    }
+
     @GetMapping(params = {
         "gender"
     })
