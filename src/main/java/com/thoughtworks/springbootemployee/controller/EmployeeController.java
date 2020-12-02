@@ -35,15 +35,13 @@ public class EmployeeController {
 //            .collect(Collectors.toList());
 //    }
 //
-//    @GetMapping(params = {
-//        "gender"
-//    })
-//    public List<Employee> getAll(@RequestParam("gender") String gender) {
-//        return employeeList.stream()
-//            .filter(employee -> gender.equals(employee.getGender()))
-//            .collect(Collectors.toList());
-//    }
-//
+    @GetMapping(params = {
+        "gender"
+    })
+    public List<Employee> getAll(@RequestParam("gender") String gender) {
+        return this.employeeService.getAll(gender);
+    }
+
     @PostMapping
     public Employee create(@RequestBody Employee employee) {
         return this.employeeService.create(employee);

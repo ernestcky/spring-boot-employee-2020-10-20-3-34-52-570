@@ -24,6 +24,10 @@ public class EmployeeService {
         return this.employeeRepository.findAll(gender);
     }
 
+    public List<Employee> getAll(Integer page, Integer pageSize) {
+        return this.employeeRepository.findAll(page, pageSize);
+    }
+
     public Employee create(Employee employee) {
         return this.employeeRepository.create(employee);
     }

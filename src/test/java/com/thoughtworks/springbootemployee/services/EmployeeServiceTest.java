@@ -98,4 +98,27 @@ class EmployeeServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void should_return_two_employee_when_get_all_with_page_size_given_repository() {
+        //given
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        EmployeeService employeeService = new EmployeeService(employeeRepository);
+        List<Employee> init = Arrays.asList(
+                new Employee(1, null, null, "F", null),
+                new Employee(2, null, null, "M", null),
+                new Employee(3, null, null, "F", null),
+                new Employee(4, null, null, "F", null),
+                new Employee(5, null, null, "F", null)
+        );
+
+        List<Employee> expected = init.stream().filter(employee -> employee.getId().equals(3) || employee.getId().equals(4)).collect(Collectors.toList());
+
+        //when
+        init.stream().forEach(employee -> employeeService.create(employee));
+        List<Employee> actual = employeeService.getAll(2, 2);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
 }

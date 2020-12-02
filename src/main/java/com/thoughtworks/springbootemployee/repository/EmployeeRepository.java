@@ -21,6 +21,10 @@ public class EmployeeRepository {
             .collect(Collectors.toList());
     }
 
+    public List<Employee> findAll(Integer page, Integer pageSize) {
+        return null;
+    }
+
     public Employee create(Employee employee) {
         this.employeeList.add(employee);
         return employee;
