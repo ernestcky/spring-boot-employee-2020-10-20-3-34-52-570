@@ -26,19 +26,7 @@ public class Employee {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
     public String getGender() {
         return gender;
-    }
-
-    public Integer getSalary() {
-        return salary;
     }
 }
