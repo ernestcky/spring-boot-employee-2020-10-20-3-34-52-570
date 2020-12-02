@@ -10,6 +10,6 @@ public class CompanyRepository {
     private List<Company> companyList;
 
     public List<Company> findAll() {
-        return null;
+        return this.companyList;
     }
 }
