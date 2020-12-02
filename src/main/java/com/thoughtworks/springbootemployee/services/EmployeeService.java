@@ -27,4 +27,8 @@ public class EmployeeService {
     public Employee findEmployee(Integer employeeId) {
         return this.employeeRepository.findEmployee(employeeId);
     }
+
+    public Employee update(Integer employeeId, Employee employeeUpdate) {
+        return this.employeeRepository.update(employeeId, employeeUpdate);
+    }
 }

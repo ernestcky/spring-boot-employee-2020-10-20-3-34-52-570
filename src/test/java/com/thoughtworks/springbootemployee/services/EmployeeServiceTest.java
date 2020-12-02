@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Arrays;
 import java.util.List;
@@ -59,6 +60,24 @@ class EmployeeServiceTest {
         //then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void should_return_correct_employee_details_when_update_given_repository_and_employee() {
+        //given
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        EmployeeService employeeService = new EmployeeService(employeeRepository);
+        Employee init = new Employee(1, "Ernest", 22, "M", 10000);
+
+        Employee expected = new Employee(1, "Ernest", 23, "M", 10000);
+
+
+        //when
+        Employee actual = employeeService.update(init.getId(), expected);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
     
 
 }

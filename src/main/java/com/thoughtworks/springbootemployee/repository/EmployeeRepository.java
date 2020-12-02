@@ -22,4 +22,8 @@ public class EmployeeRepository {
     public Employee findEmployee(Integer employeeId) {
         return this.employeeList.stream().filter(employee -> employee.getId().equals(employeeId)).findFirst().orElse(null);
     }
+
+    public Employee update(Integer employeeId, Employee employeeUpdate) {
+        return null;
+    }
 }
