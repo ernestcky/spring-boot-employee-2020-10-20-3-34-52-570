@@ -42,4 +42,9 @@ public class CompanyController {
         return this.companyService.findAll(page, pageSize);
     }
 
+    @PutMapping("/{companyId}")
+    public Company update(@PathVariable Integer companyId, @RequestBody Company companyUpdate) {
+        return this.companyService.update(companyId, companyUpdate);
+    }
+
 }
