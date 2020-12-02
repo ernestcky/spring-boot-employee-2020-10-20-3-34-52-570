@@ -30,4 +30,8 @@ public class CompanyService {
     public List<Employee> getCompanyEmployees(Integer companyId) {
         return this.companyRepository.getCompanyEmployees(companyId);
     }
+
+    public List<Company> findAll(int page, int pageSize) {
+        return this.companyRepository.findAll(page, pageSize);
+    }
 }

@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -88,6 +89,28 @@ class CompanyServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void should_return_two_companies_when_get_all_with_page_size_given_repository() {
+        //given
+        CompanyRepository companyRepository = new CompanyRepository();
+        CompanyService companyService = new CompanyService(companyRepository);
+        List<Company> init = Arrays.asList(
+                new Company(),
+                new Company(),
+                new Company(),
+                new Company(),
+                new Company()
+        );
+
+        List<Company> expected = init.stream().filter(employee -> employee.getCompanyId().equals(3) || employee.getCompanyId().equals(4)).collect(Collectors.toList());
+
+        //when
+        init.stream().forEach(company -> companyService.create(company));
+        List<Company> actual = companyService.findAll(2, 2);
+
+        //then
+        assertEquals(expected, actual);
+    }
 
 
 

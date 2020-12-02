@@ -15,6 +15,10 @@ public class CompanyRepository {
         return this.companyList;
     }
 
+    public List<Company> findAll(Integer page, Integer pageSize) {
+        return null;
+    }
+
     public Company create(Company company) {
         this.companyList.add(company);
         return company;
