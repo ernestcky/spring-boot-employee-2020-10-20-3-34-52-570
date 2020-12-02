@@ -12,6 +12,10 @@ public class Company {
         return companyId;
     }
 
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
     public String getCompanyName() {
         return companyName;
     }
@@ -22,5 +26,9 @@ public class Company {
 
     public List<Employee> getEmployees() {
         return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }
