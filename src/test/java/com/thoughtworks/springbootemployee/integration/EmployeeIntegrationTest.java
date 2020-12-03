@@ -112,4 +112,11 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("$", hasSize(2)));
     }
 
+
+    @Test
+    public void should_return_not_found_status_when_get_employee_given_invalid_id() throws Exception {
+        //when
+        mockMvc.perform(get("/employees/123"))
+                .andExpect(status().isNotFound());
+    }
 }
