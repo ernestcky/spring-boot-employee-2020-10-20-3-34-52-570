@@ -113,36 +113,22 @@ class CompanyServiceTest {
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    public void should_return_correct_company_details_when_update_given_repository_and_employee() {
-//        //given
-//        CompanyRepository companyRepository = new CompanyRepository();
-//        CompanyService companyService = new CompanyService(companyRepository);
-//        Company init = new Company(1, "ABC Company", 22, new ArrayList<>());
-//
-//        Company expected = new Company(1, "XYZ Company", 22, new ArrayList<>());
-//
-//        //when
-//        Company actual = companyService.update(init.getCompanyId(), expected);
-//
-//        //then
-//        assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void should_delete_successfully_when_delete_given_repository_and_company_list() {
-//        //given
-//        CompanyRepository companyRepository = new CompanyRepository();
-//        CompanyService companyService = new CompanyService(companyRepository);
-//        Company init = new Company();
-//        init.setCompanyId(1);
-//        companyService.create(init);
-//
-//        //when
-//        companyService.delete(init.getCompanyId());
-//
-//        //then
-//        assertEquals(0, companyRepository.getCompanyList().size());
-//    }
+    @Test
+    public void should_return_correct_company_details_when_update_given_repository_and_employee() {
+        //given
+        Company init = new Company("init", 30);
+        Company expected = new Company("expected", 20);
+
+        when(companyRepository.existsById(init.getCompanyId())).thenReturn(true);
+        when(companyRepository.save(expected)).thenReturn(expected);
+
+        //when
+        Company actual = companyService.update(init.getCompanyId(), expected);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
+
 
 }
