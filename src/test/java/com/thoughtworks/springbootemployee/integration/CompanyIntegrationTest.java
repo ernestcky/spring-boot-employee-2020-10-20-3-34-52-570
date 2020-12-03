@@ -112,4 +112,18 @@ public class CompanyIntegrationTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    public void should_return_correct_company_when_get_company_given_valid_id() throws Exception {
+        //given
+        Company company = new Company("company1", 2020);
+        companyRepository.insert(company);
+
+        //when
+        mockMvc.perform(get("/companies/" + company.getCompanyId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.companyId").isString())
+                .andExpect(jsonPath("$.companyName").value("company1"))
+                .andExpect(jsonPath("$.employeesNumber").value(2020));
+    }
+
 }
