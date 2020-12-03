@@ -16,7 +16,7 @@ public class EmployeeController {
 
     @GetMapping
     public List<Employee> getAll() {
-        return this.employeeService.getAll();
+        return this.employeeService.findAll();
     }
 
     @GetMapping(params = {
@@ -24,14 +24,14 @@ public class EmployeeController {
         "pageSize"
     })
     public List<Employee> getAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
-        return this.employeeService.getAll(page, pageSize);
+        return this.employeeService.findAll(page, pageSize);
     }
 
     @GetMapping(params = {
         "gender"
     })
     public List<Employee> getAll(@RequestParam("gender") String gender) {
-        return this.employeeService.getAll(gender);
+        return this.employeeService.findAll(gender);
     }
 
     @PostMapping

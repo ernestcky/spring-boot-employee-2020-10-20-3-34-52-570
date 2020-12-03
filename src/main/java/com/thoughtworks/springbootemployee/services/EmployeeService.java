@@ -15,16 +15,15 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    // todo: change to findall
-    public List<Employee> getAll() {
+    public List<Employee> findAll() {
         return this.employeeRepository.findAll();
     }
 
-    public List<Employee> getAll(String gender) {
+    public List<Employee> findAll(String gender) {
         return this.employeeRepository.findAllByGender(gender);
     }
 
-    public List<Employee> getAll(Integer page, Integer pageSize) {
+    public List<Employee> findAll(Integer page, Integer pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<Employee> employeePage = this.employeeRepository.findAll(pageable);
         return employeePage.toList();

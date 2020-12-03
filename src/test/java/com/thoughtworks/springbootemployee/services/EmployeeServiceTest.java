@@ -31,7 +31,7 @@ class EmployeeServiceTest {
         when(employeeRepository.findAll()).thenReturn(expected);
 
         //when
-        List<Employee> actual = employeeService.getAll();
+        List<Employee> actual = employeeService.findAll();
 
         //then
         assertEquals(expected, actual);
@@ -94,7 +94,7 @@ class EmployeeServiceTest {
         when(employeeRepository.findAllByGender("F")).thenReturn(expected);
 
         //when
-        List<Employee> actual = this.employeeService.getAll("F");
+        List<Employee> actual = this.employeeService.findAll("F");
 
         //then
         assertEquals(expected, actual);
@@ -111,7 +111,7 @@ class EmployeeServiceTest {
         when(employeeRepository.findAll((Pageable)any())).thenReturn(new PageImpl<>(expected));
 
         //when
-        List<Employee> actual = employeeService.getAll(2, 2);
+        List<Employee> actual = employeeService.findAll(2, 2);
 
         //then
         assertEquals(expected, actual);
