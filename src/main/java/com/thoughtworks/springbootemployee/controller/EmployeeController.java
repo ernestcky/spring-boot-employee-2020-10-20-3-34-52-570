@@ -1,8 +1,8 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
-import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.services.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-    private EmployeeService employeeService = new EmployeeService(new EmployeeRepository());
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping
     public List<Employee> getAll() {
@@ -39,18 +40,18 @@ public class EmployeeController {
     }
 
     @PutMapping("/{employeeId}")
-    public Employee update(@PathVariable Integer employeeId, @RequestBody Employee employeeUpdate) {
+    public Employee update(@PathVariable String employeeId, @RequestBody Employee employeeUpdate) {
         return this.employeeService.update(employeeId, employeeUpdate);
     }
 
     @DeleteMapping("/{employeeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Integer employeeId) {
+    public void delete(@PathVariable String employeeId) {
         this.employeeService.delete(employeeId);
     }
 
     @GetMapping("/{employeeId}")
-    public Employee findEmployee(@PathVariable Integer employeeId) {
+    public Employee findEmployee(@PathVariable String employeeId) {
         return this.employeeService.findEmployee(employeeId);
     }
 }
