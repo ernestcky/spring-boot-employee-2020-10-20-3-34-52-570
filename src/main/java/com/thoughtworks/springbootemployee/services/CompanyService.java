@@ -30,7 +30,9 @@ public class CompanyService {
     }
 
     public Company getCompany(String companyId) {
-        return this.companyRepository.findById(companyId).orElseThrow(RuntimeException::new);
+        return this.companyRepository.findById(companyId).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "entity not found"
+        ));
     }
 
     public List<Employee> getCompanyEmployees(String companyId) {
