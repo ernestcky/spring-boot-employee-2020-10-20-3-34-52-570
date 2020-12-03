@@ -30,6 +30,9 @@ public class CompanyIntegrationTest {
     @Autowired
     private CompanyRepository companyRepository;
 
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
     @AfterEach
     void tearDown() {
         companyRepository.deleteAll();
@@ -161,4 +164,24 @@ public class CompanyIntegrationTest {
         assertEquals(expected, companies.size());
     }
 
+    @Test
+    public void should_return_employee_list_when_get_company_employee_list_given_company_and_employees() throws Exception {
+        //given
+        Company company = new Company();
+        company.setCompanyId("1");
+        Employee employee1 = new Employee("employee1", 12, "Male", 100, company.getCompanyId());
+        Employee employee2 = new Employee("employee2", 2, "Female", 150, company.getCompanyId());
+
+        companyRepository.insert(company);
+        employeeRepository.insert(employee1);
+        employeeRepository.insert(employee2);
+
+
+        //when
+        mockMvc.perform(get("/companies/" + company.getCompanyId() + "/employees"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].name").value("employee1"))
+                .andExpect(jsonPath("$[1].name").value("employee2"));
+    }
 }
