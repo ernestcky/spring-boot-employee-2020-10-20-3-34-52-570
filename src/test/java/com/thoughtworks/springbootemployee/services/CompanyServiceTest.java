@@ -129,6 +129,17 @@ class CompanyServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void should_delete_successfully_when_delete_given_repository_and_company_list() {
+        //given
+        Integer expected = companyService.findAll().size();
+        Company init = new Company();
+        companyRepository.insert(init);
 
+        //when
+        companyService.delete(init.getCompanyId());
 
+        //then
+        assertEquals(expected, companyRepository.findAll().size());
+    }
 }
