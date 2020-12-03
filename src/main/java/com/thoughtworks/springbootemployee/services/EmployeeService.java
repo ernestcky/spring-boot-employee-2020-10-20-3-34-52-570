@@ -48,7 +48,6 @@ public class EmployeeService {
         employeeUpdate.setId(employeeId);
         return this.employeeRepository.save(employeeUpdate);
     }
-
     public void delete(String employeeId) {
         this.employeeRepository.deleteById(employeeId);
     }

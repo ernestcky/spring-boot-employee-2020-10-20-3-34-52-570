@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -81,8 +85,6 @@ class CompanyServiceTest {
 
         Company company = new Company();
         company.setCompanyId("1");
-        company.setEmployees(expected);
-
 
         when(employeeRepository.findAllByCompanyId(company.getCompanyId())).thenReturn(expected);
 
@@ -94,29 +96,23 @@ class CompanyServiceTest {
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    public void should_return_two_companies_when_get_all_with_page_size_given_repository() {
-//        //given
-//        CompanyRepository companyRepository = new CompanyRepository();
-//        CompanyService companyService = new CompanyService(companyRepository);
-//        List<Company> init = Arrays.asList(
-//                new Company(1, null, null, null),
-//                new Company(2, null, null, null),
-//                new Company(3, null, null, null),
-//                new Company(4, null, null, null),
-//                new Company(5, null, null, null)
-//        );
-//
-//        List<Company> expected = init.stream().filter(employee -> employee.getCompanyId().equals(3) || employee.getCompanyId().equals(4)).collect(Collectors.toList());
-//
-//        //when
-//        init.stream().forEach(company -> companyService.create(company));
-//        List<Company> actual = companyService.findAll(2, 2);
-//
-//        //then
-//        assertEquals(expected, actual);
-//    }
-//
+    @Test
+    public void should_return_two_companies_when_get_all_with_page_size_given_repository() {
+        //given
+        List<Company> expected = Arrays.asList(
+                new Company("test", 3),
+                new Company("test2", 30)
+        );
+
+        when(companyRepository.findAll((Pageable)any())).thenReturn(new PageImpl<>(expected));
+
+        //when
+        List<Company> actual = companyService.findAll(2, 2);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
 //    @Test
 //    public void should_return_correct_company_details_when_update_given_repository_and_employee() {
 //        //given
