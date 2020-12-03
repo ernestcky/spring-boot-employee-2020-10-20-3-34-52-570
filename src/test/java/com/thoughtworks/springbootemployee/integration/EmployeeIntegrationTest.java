@@ -17,8 +17,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -45,12 +44,12 @@ public class EmployeeIntegrationTest {
         //when
         //then
         mockMvc.perform(get("/employees"))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].id").isString())
-            .andExpect(jsonPath("$[0].name").value("Ernest"))
-            .andExpect(jsonPath("$[0].age").value(22))
-            .andExpect(jsonPath("$[0].gender").value("Male"))
-            .andExpect(jsonPath("$[0].salary").value(1000));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").isString())
+                .andExpect(jsonPath("$[0].name").value("Ernest"))
+                .andExpect(jsonPath("$[0].age").value(22))
+                .andExpect(jsonPath("$[0].gender").value("Male"))
+                .andExpect(jsonPath("$[0].salary").value(1000));
     }
 
     @Test
@@ -65,14 +64,14 @@ public class EmployeeIntegrationTest {
 
         //when
         mockMvc.perform(post("/employees")
-            .contentType(APPLICATION_JSON)
-            .content(employeeAsJson))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id").isString())
-            .andExpect(jsonPath("$.name").value("Ernest"))
-            .andExpect(jsonPath("$.age").value(19))
-            .andExpect(jsonPath("$.gender").value("Male"))
-            .andExpect(jsonPath("$.salary").value(55555555));
+                .contentType(APPLICATION_JSON)
+                .content(employeeAsJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isString())
+                .andExpect(jsonPath("$.name").value("Ernest"))
+                .andExpect(jsonPath("$.age").value(19))
+                .andExpect(jsonPath("$.gender").value("Male"))
+                .andExpect(jsonPath("$.salary").value(55555555));
 
         List<Employee> employees = employeeRepository.findAll();
         //the
@@ -80,7 +79,7 @@ public class EmployeeIntegrationTest {
         assertEquals("Ernest", employees.get(0).getName());
         assertEquals(19, employees.get(0).getAge());
     }
-    
+
     @Test
     public void should_return_female_when_get_by_gender_given_employees() throws Exception {
         //given
@@ -127,13 +126,39 @@ public class EmployeeIntegrationTest {
         employeeRepository.save(employee);
 
         //when
-        mockMvc.perform(get("/employees/"+employee.getId()))
-                    .andExpect(status().isOk())
+        mockMvc.perform(get("/employees/" + employee.getId()))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isString())
                 .andExpect(jsonPath("$.name").value("Ernest"))
                 .andExpect(jsonPath("$.age").value(18))
                 .andExpect(jsonPath("$.gender").value("Male"))
                 .andExpect(jsonPath("$.salary").value(1000));
     }
+
+    @Test
+    public void should_return_saved_employee_when_update_given_employee_json() throws Exception {
+        //given
+        Employee employee = new Employee("Ernest", 22, "Male", 100000000);
+        employeeRepository.save(employee);
+
+        String employeeAsJson = "{\n" +
+                "    \"name\": \"Ernest\",\n" +
+                "    \"age\": 19,\n" +
+                "    \"gender\": \"Male\",\n" +
+                "    \"salary\": 55555555\n" +
+                "}";
+
+        //when
+        mockMvc.perform(put("/employees/" + employee.getId())
+                        .contentType(APPLICATION_JSON)
+                        .content(employeeAsJson))
+                            .andExpect(status().isOk())
+                            .andExpect(jsonPath("$.id").isString())
+                            .andExpect(jsonPath("$.name").value("Ernest"))
+                            .andExpect(jsonPath("$.age").value(19))
+                            .andExpect(jsonPath("$.gender").value("Male"))
+                            .andExpect(jsonPath("$.salary").value(55555555));
+    }
+
 
 }
