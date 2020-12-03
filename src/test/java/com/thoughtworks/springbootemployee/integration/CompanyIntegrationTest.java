@@ -104,4 +104,12 @@ public class CompanyIntegrationTest {
                 .andExpect(jsonPath("$[0].companyName").value("company3"))
                 .andExpect(jsonPath("$", hasSize(2)));
     }
+
+    @Test
+    public void should_return_not_found_status_when_get_company_given_invalid_id() throws Exception {
+        //when
+        mockMvc.perform(get("/companies/123"))
+                .andExpect(status().isNotFound());
+    }
+
 }
