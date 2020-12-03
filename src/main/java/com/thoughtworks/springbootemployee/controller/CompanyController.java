@@ -2,17 +2,17 @@ package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
-import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.services.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/companies")
 public class CompanyController {
-    private CompanyService companyService = new CompanyService(new CompanyRepository());
+    @Autowired
+    private CompanyService companyService;
 
     @GetMapping
     public List<Company> findAll() {
@@ -25,12 +25,12 @@ public class CompanyController {
     }
 
     @GetMapping("/{companyId}")
-    public Company getCompany(@PathVariable Integer companyId) {
+    public Company getCompany(@PathVariable String companyId) {
         return this.companyService.getCompany(companyId);
     }
 
     @GetMapping("/{companyId}/employees")
-    public List<Employee> getCompanyEmployees(@PathVariable Integer companyId) {
+    public List<Employee> getCompanyEmployees(@PathVariable String companyId) {
         return this.companyService.getCompanyEmployees(companyId);
     }
 
@@ -43,12 +43,12 @@ public class CompanyController {
     }
 
     @PutMapping("/{companyId}")
-    public Company update(@PathVariable Integer companyId, @RequestBody Company companyUpdate) {
+    public Company update(@PathVariable String companyId, @RequestBody Company companyUpdate) {
         return this.companyService.update(companyId, companyUpdate);
     }
 
     @DeleteMapping("/{companyId}")
-    public void delete(@PathVariable Integer companyId) {
+    public void delete(@PathVariable String companyId) {
         this.companyService.delete(companyId);
     }
 
