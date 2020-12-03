@@ -15,7 +15,7 @@ public class EmployeeService {
     public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
-
+    // todo: change to findall
     public List<Employee> getAll() {
         return this.employeeRepository.findAll();
     }

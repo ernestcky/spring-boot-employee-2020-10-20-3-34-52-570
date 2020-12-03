@@ -37,7 +37,7 @@ public class CompanyRepository {
     public Company getCompany(Integer companyId) {
         return this.companyList.stream().filter(company -> company.getCompanyId().equals(companyId)).findFirst().orElse(null);
     }
-
+    // todo: remove map
     public List<Employee> getCompanyEmployees(Integer companyId) {
         return this.companyList.stream().filter(company -> company.getCompanyId().equals(companyId)).findFirst().map(company -> company.getEmployees()).orElse(null);
     }

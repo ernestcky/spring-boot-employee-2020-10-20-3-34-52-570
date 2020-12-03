@@ -71,13 +71,14 @@ class EmployeeServiceTest {
 
         //when
         Employee actual = employeeService.update(init.getId(), expected);
+        //todo: getList from repo directly
 
         //then
         assertEquals(expected, actual);
     }
 
     @Test
-    public void should_return_female_employ_when_get_by_gender_given_param_is_male() {
+    public void should_return_female_employ_when_get_by_gender_given_param_is_female() {
         //given
         EmployeeRepository employeeRepository = new EmployeeRepository();
         EmployeeService employeeService = new EmployeeService(employeeRepository);
@@ -88,7 +89,7 @@ class EmployeeServiceTest {
         );
         List<Employee> expected = init.stream().filter(employee -> employee.getGender().equals("F")).collect(Collectors.toList());
 
-        //when
+        //when //Todo: remove logic
         init.stream().forEach(employee -> employeeService.create(employee));
         List<Employee> actual = employeeService.getAll("F");
 
@@ -108,9 +109,9 @@ class EmployeeServiceTest {
                 new Employee(4, null, null, "F", null),
                 new Employee(5, null, null, "F", null)
         );
-
+        //todo: remove logic
         List<Employee> expected = init.stream().filter(employee -> employee.getId().equals(3) || employee.getId().equals(4)).collect(Collectors.toList());
-
+        // todo: use mock
         //when
         init.stream().forEach(employee -> employeeService.create(employee));
         List<Employee> actual = employeeService.getAll(2, 2);
@@ -122,6 +123,7 @@ class EmployeeServiceTest {
     @Test
     public void should_delete_successfully_when_delete_given_repository_and_employee_list() {
         //given
+        // todo: mock
         EmployeeRepository employeeRepository = new EmployeeRepository();
         EmployeeService employeeService = new EmployeeService(employeeRepository);
         Employee init = new Employee();

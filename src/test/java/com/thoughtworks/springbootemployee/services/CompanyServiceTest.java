@@ -46,6 +46,7 @@ class CompanyServiceTest {
         //when
         Company actual = companyService.create(expected);
 
+        //todo: mock, ArgumentCaptor
         //then
         assertEquals(expected, actual);
     }
@@ -61,7 +62,6 @@ class CompanyServiceTest {
         when(companyRepository.getCompany(expected.getCompanyId())).thenReturn(expected);
 
         //when
-        companyService.create(expected);
         Company actual = companyService.getCompany(expected.getCompanyId());
 
         //then
@@ -82,7 +82,7 @@ class CompanyServiceTest {
         company.setCompanyId(1);
         company.setEmployees(expected);
 
-        //when
+        //when //todo: repo, go to given
         companyService.create(company);
         List<Employee> actual = companyService.getCompanyEmployees(company.getCompanyId());
 
