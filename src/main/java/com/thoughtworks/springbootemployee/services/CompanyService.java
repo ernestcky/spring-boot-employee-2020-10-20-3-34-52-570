@@ -36,7 +36,7 @@ public class CompanyService {
     }
 
     public List<Company> findAll(int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Pageable pageable = PageRequest.of(page - 1, pageSize);
         return this.companyRepository.findAll(pageable).toList();
     }
 

@@ -11,8 +11,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -85,5 +87,21 @@ public class CompanyIntegrationTest {
                         .andExpect(status().isOk())
                         .andExpect(jsonPath("$.companyId").isString())
                         .andExpect(jsonPath("$.employeesNumber").value(200));
+    }
+
+    @Test
+    public void should_return_two_employees_when_get_all_with_page_size_given_employees() throws Exception {
+        //given
+        Company company1 = new Company("company1", 322);
+        Company company2 = new Company("company2", 1000);
+        Company company3 = new Company("company3", 340);
+        Company company4 = new Company("company4", 2000);
+        companyRepository.saveAll(Arrays.asList(company1, company2, company3, company4));
+
+        //when
+        mockMvc.perform(get("/companies?page=2&pageSize=2"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].companyName").value("company3"))
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 }
