@@ -6,14 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class EmployeeServiceTest {
@@ -98,44 +99,35 @@ class EmployeeServiceTest {
         //then
         assertEquals(expected, actual);
     }
-//
-//    @Test
-//    public void should_return_two_employee_when_get_all_with_page_size_given_repository() {
-//        //given
-//        List<Employee> init = Arrays.asList(
-//                new Employee(1, null, null, "F", null),
-//                new Employee(2, null, null, "M", null),
-//                new Employee(3, null, null, "F", null),
-//                new Employee(4, null, null, "F", null),
-//                new Employee(5, null, null, "F", null)
-//        );
-//        //todo: remove logic
-//        List<Employee> expected = init.stream().filter(employee -> employee.getId().equals(3) || employee.getId().equals(4)).collect(Collectors.toList());
-//        // todo: use mock
-//        //when
-//        init.stream().forEach(employee -> employeeService.create(employee));
-//        List<Employee> actual = employeeService.getAll(2, 2);
-//
-//        //then
-//        assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void should_delete_successfully_when_delete_given_repository_and_employee_list() {
-//        //given
-//        // todo: mock
-//        EmployeeRepository employeeRepository = new EmployeeRepository();
-//        EmployeeService employeeService = new EmployeeService(employeeRepository);
-//        Employee init = new Employee();
-//        init.setId(1);
-//        employeeService.create(init);
-//
-//        //when
-//        employeeService.delete(init.getId());
-//
-//        //then
-//        assertEquals(0, employeeRepository.getEmployeeList().size());
-//    }
-    
+
+    @Test
+    public void should_return_two_employee_when_get_all_with_page_size_given_repository() {
+        //given
+        List<Employee> expected = Arrays.asList(
+                new Employee("3", null, null, "F", null),
+                new Employee("4", null, null, "F", null)
+        );
+
+        when(employeeRepository.findAll((Pageable)any())).thenReturn(new PageImpl<>(expected));
+
+        //when
+        List<Employee> actual = employeeService.getAll(2, 2);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void should_delete_successfully_when_delete_given_repository_and_employee_list() {
+        //given
+        String id = "1";
+
+        //when
+        employeeService.delete(id);
+
+        //then
+        verify(employeeRepository, times(1)).deleteById("1");
+    }
+
 
 }
