@@ -37,24 +37,20 @@ class CompanyServiceTest {
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    public void should_return_created_company_when_create_given_repository() {
-//        //given
-//        CompanyRepository companyRepository = Mockito.mock(CompanyRepository.class);
-//        CompanyService companyService = new CompanyService(companyRepository);
-//
-//        Company expected = new Company();
-//
-//        when(companyRepository.create(expected)).thenReturn(expected);
-//
-//        //when
-//        Company actual = companyService.create(expected);
-//
-//        //todo: mock, ArgumentCaptor
-//        //then
-//        assertEquals(expected, actual);
-//    }
-//
+    @Test
+    public void should_return_created_company_when_create_given_repository() {
+        //given
+        Company expected = new Company();
+
+        when(companyRepository.insert(expected)).thenReturn(expected);
+
+        //when
+        Company actual = companyService.create(expected);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
 //    @Test
 //    public void should_return_specified_company_when_get_given_repository_and_id() {
 //        //given
