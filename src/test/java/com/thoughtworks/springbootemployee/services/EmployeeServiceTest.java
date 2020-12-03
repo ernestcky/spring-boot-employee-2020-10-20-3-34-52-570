@@ -80,23 +80,24 @@ class EmployeeServiceTest {
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    public void should_return_female_employ_when_get_by_gender_given_param_is_female() {
-//        //given
-//        List<Employee> init = Arrays.asList(
-//                new Employee(null, null, null, "F", null),
-//                new Employee(null, null, null, "M", null),
-//                new Employee(null, null, null, "F", null)
-//        );
-//        List<Employee> expected = init.stream().filter(employee -> employee.getGender().equals("F")).collect(Collectors.toList());
-//
-//        //when //Todo: remove logic
-//        init.stream().forEach(employee -> employeeService.create(employee));
-//        List<Employee> actual = employeeService.getAll("F");
-//
-//        //then
-//        assertEquals(expected, actual);
-//    }
+    @Test
+    public void should_return_female_employ_when_get_by_gender_given_param_is_female() {
+        //given
+        Employee male1 = new Employee(null, null, null, "M", null);
+        Employee female1 = new Employee(null, null, null, "F", null);
+        Employee male2 = new Employee(null, null, null, "M", null);
+
+        List<Employee> init = Arrays.asList(male1, female1, male2);
+        List<Employee> expected = Arrays.asList(female1);
+
+        when(employeeRepository.findAllByGender("F")).thenReturn(expected);
+
+        //when
+        List<Employee> actual = this.employeeService.getAll("F");
+
+        //then
+        assertEquals(expected, actual);
+    }
 //
 //    @Test
 //    public void should_return_two_employee_when_get_all_with_page_size_given_repository() {
