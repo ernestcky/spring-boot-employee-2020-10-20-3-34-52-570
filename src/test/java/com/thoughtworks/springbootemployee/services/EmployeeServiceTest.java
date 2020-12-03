@@ -63,22 +63,23 @@ class EmployeeServiceTest {
         //then
         assertEquals(expected, actual);
     }
-//
-//    @Test
-//    public void should_return_correct_employee_details_when_update_given_repository_and_employee() {
-//        //given
-//        Employee init = new Employee(1, "Ernest", 22, "M", 10000);
-//
-//        Employee expected = new Employee(1, "Ernest", 23, "M", 10000);
-//
-//        //when
-//        Employee actual = employeeService.update(init.getId(), expected);
-//        //todo: getList from repo directly
-//
-//        //then
-//        assertEquals(expected, actual);
-//    }
-//
+
+    @Test
+    public void should_return_correct_employee_details_when_update_given_repository_and_employee() {
+        //given
+        Employee init = new Employee("1", "Ernest", 22, "M", 10000);
+        Employee expected = new Employee("1", "Ernest", 23, "M", 10000);
+
+        when(employeeRepository.existsById(init.getId())).thenReturn(true);
+        when(employeeRepository.save(expected)).thenReturn(expected);
+
+        //when
+        Employee actual = employeeService.update(init.getId(), expected);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
 //    @Test
 //    public void should_return_female_employ_when_get_by_gender_given_param_is_female() {
 //        //given
