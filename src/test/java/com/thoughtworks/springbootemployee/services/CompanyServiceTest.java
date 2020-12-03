@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.services;
 
 import com.thoughtworks.springbootemployee.entity.Company;
+import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -69,9 +71,6 @@ class CompanyServiceTest {
 //
 //    @Test
 //    public void should_return_employee_list_when_get_company_employee_given_company() {
-//        CompanyRepository companyRepository = new CompanyRepository();
-//        CompanyService companyService = new CompanyService(companyRepository);
-//
 //        List<Employee> expected = new ArrayList<>();
 //        expected.add(new Employee());
 //        expected.add(new Employee());
