@@ -24,7 +24,7 @@ public class EmployeeService {
     }
 
     public List<Employee> findAll(Integer page, Integer pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Pageable pageable = PageRequest.of(page - 1, pageSize);
         Page<Employee> employeePage = this.employeeRepository.findAll(pageable);
         return employeePage.toList();
     }
