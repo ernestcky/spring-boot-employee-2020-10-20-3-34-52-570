@@ -12,7 +12,7 @@ public class Company {
     private String companyId;
     private String companyName;
     private Integer employeesNumber;
-    private List<Employee> employees;
+//    private List<Employee> employees;
 
     public Company() {
     }
@@ -20,14 +20,14 @@ public class Company {
     public Company(String companyName, Integer employeesNumber, List<Employee> employees) {
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;
-        this.employees = employees;
+//        this.employees = employees;
     }
 
     public Company(String companyId, String companyName, Integer employeesNumber, List<Employee> employees) {
         this.companyId = companyId;
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;
-        this.employees = employees;
+//        this.employees = employees;
     }
 
     public String getCompanyId() {
@@ -46,11 +46,11 @@ public class Company {
         return employeesNumber;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
+//    public List<Employee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(List<Employee> employees) {
+//        this.employees = employees;
+//    }
 }

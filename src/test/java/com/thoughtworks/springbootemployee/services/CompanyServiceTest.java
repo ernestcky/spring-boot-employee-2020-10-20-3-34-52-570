@@ -27,6 +27,9 @@ class CompanyServiceTest {
     @Mock
     CompanyRepository companyRepository;
 
+    @Mock
+    EmployeeRepository employeeRepository;
+
     @Test
     public void should_return_all_when_get_all_given_repository_and_companies() {
         //given
@@ -81,7 +84,7 @@ class CompanyServiceTest {
         company.setEmployees(expected);
 
 
-        when(companyRepository.findById(company.getCompanyId())).thenReturn(Optional.of(company));
+        when(employeeRepository.findAllByCompanyId(company.getCompanyId())).thenReturn(expected);
 
         //when //todo: repo, go to given
         companyService.create(company);
@@ -90,7 +93,7 @@ class CompanyServiceTest {
         //then
         assertEquals(expected, actual);
     }
-//
+
 //    @Test
 //    public void should_return_two_companies_when_get_all_with_page_size_given_repository() {
 //        //given
