@@ -146,19 +146,19 @@ public class CompanyIntegrationTest {
                 .andExpect(jsonPath("$.employeesNumber").value(345));
     }
 
-//    @Test
-//    public void should_return_empty_list_when_delete_given_one_employee_in_list() throws Exception {
-//        //given
-//        Integer expected = this.companyRepository.findAll().size();
-//        Company company = this.companyRepository.insert(new Company());
-//
-//        //when
-//        mockMvc.perform(delete("/companies/" + company.getCompanyId()))
-//                .andExpect(status().isNoContent());
-//
-//        List<Company> companies = companyRepository.findAll();
-//        //the
-//        assertEquals(expected, companies.size());
-//    }
+    @Test
+    public void should_return_empty_list_when_delete_given_one_employee_in_list() throws Exception {
+        //given
+        Integer expected = this.companyRepository.findAll().size();
+        Company company = this.companyRepository.insert(new Company());
+
+        //when
+        mockMvc.perform(delete("/companies/" + company.getCompanyId()))
+                .andExpect(status().isOk());
+
+        List<Company> companies = companyRepository.findAll();
+        //the
+        assertEquals(expected, companies.size());
+    }
 
 }
