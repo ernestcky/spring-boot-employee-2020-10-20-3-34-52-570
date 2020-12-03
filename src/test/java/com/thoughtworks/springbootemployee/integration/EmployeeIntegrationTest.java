@@ -159,6 +159,22 @@ public class EmployeeIntegrationTest {
                             .andExpect(jsonPath("$.gender").value("Male"))
                             .andExpect(jsonPath("$.salary").value(55555555));
     }
+    
+    @Test
+    public void should_return_empty_list_when_delete_given_one_employee_in_list() throws Exception {
+        //given
+        Integer expected = this.employeeRepository.findAll().size();
+        Employee employee = this.employeeRepository.save(new Employee());
+
+        //when
+        mockMvc.perform(delete("/employees/" + employee.getId()))
+                .andExpect(status().isNoContent());
+
+        List<Employee> employees = employeeRepository.findAll();
+        //the
+        assertEquals(expected, employees.size());
+    }
+    
 
 
 }
