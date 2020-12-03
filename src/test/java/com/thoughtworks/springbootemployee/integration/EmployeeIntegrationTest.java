@@ -119,4 +119,21 @@ public class EmployeeIntegrationTest {
         mockMvc.perform(get("/employees/123"))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    public void should_return_correct_employee_when_get_employee_given_valid_id() throws Exception {
+        //given
+        Employee employee = new Employee("Ernest", 18, "Male", 1000);
+        employeeRepository.save(employee);
+
+        //when
+        mockMvc.perform(get("/employees/"+employee.getId()))
+                    .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isString())
+                .andExpect(jsonPath("$.name").value("Ernest"))
+                .andExpect(jsonPath("$.age").value(18))
+                .andExpect(jsonPath("$.gender").value("Male"))
+                .andExpect(jsonPath("$.salary").value(1000));
+    }
+
 }
