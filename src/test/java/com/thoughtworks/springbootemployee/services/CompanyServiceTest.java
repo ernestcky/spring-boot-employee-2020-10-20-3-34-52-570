@@ -68,25 +68,28 @@ class CompanyServiceTest {
         //then
         assertEquals(expected, actual);
     }
-//
-//    @Test
-//    public void should_return_employee_list_when_get_company_employee_given_company() {
-//        List<Employee> expected = new ArrayList<>();
-//        expected.add(new Employee());
-//        expected.add(new Employee());
-//        expected.add(new Employee());
-//
-//        Company company = new Company();
-//        company.setCompanyId(1);
-//        company.setEmployees(expected);
-//
-//        //when //todo: repo, go to given
-//        companyService.create(company);
-//        List<Employee> actual = companyService.getCompanyEmployees(company.getCompanyId());
-//
-//        //then
-//        assertEquals(expected, actual);
-//    }
+
+    @Test
+    public void should_return_employee_list_when_get_company_employee_given_company() {
+        List<Employee> expected = new ArrayList<>();
+        expected.add(new Employee());
+        expected.add(new Employee());
+        expected.add(new Employee());
+
+        Company company = new Company();
+        company.setCompanyId("1");
+        company.setEmployees(expected);
+
+
+        when(companyRepository.findById(company.getCompanyId())).thenReturn(Optional.of(company));
+
+        //when //todo: repo, go to given
+        companyService.create(company);
+        List<Employee> actual = companyService.getCompanyEmployees(company.getCompanyId());
+
+        //then
+        assertEquals(expected, actual);
+    }
 //
 //    @Test
 //    public void should_return_two_companies_when_get_all_with_page_size_given_repository() {
