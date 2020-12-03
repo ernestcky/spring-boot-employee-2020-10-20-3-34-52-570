@@ -72,5 +72,18 @@ public class CompanyIntegrationTest {
         assertEquals(200, companies.get(0).getEmployeesNumber());
     }
 
+    @Test
+    public void should_return_specified_company_when_get_by_companyId_given_companys() throws Exception {
+        //given
+        Company company1 = new Company("company1", 300);
+        Company company2 = new Company("company2", 200);
+        companyRepository.save(company1);
+        companyRepository.save(company2);
 
+        //when
+        mockMvc.perform(get("/companies/" + company2.getCompanyId()))
+                        .andExpect(status().isOk())
+                        .andExpect(jsonPath("$.companyId").isString())
+                        .andExpect(jsonPath("$.employeesNumber").value(200));
+    }
 }
