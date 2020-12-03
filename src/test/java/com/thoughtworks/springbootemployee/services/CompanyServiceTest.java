@@ -1,23 +1,42 @@
 package com.thoughtworks.springbootemployee.services;
 
+import com.thoughtworks.springbootemployee.entity.Company;
+import com.thoughtworks.springbootemployee.repository.CompanyRepository;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 class CompanyServiceTest {
-//    @Test
-//    public void should_return_all_when_get_all_given_repository_and_companies() {
-//        //given
-//        CompanyRepository companyRepository = Mockito.mock(CompanyRepository.class);
-//        CompanyService companyService = new CompanyService(companyRepository);
-//
-//        List<Company> expected = Arrays.asList(new Company(), new Company());
-//
-//        when(companyRepository.findAll()).thenReturn(expected);
-//
-//        //when
-//        List<Company> actual = companyService.findAll();
-//
-//        //then
-//        assertEquals(expected, actual);
-//    }
-//
+    @InjectMocks
+    CompanyService companyService;
+
+    @Mock
+    CompanyRepository companyRepository;
+
+    @Test
+    public void should_return_all_when_get_all_given_repository_and_companies() {
+        //given
+        List<Company> expected = Arrays.asList(new Company(), new Company());
+        when(companyRepository.findAll()).thenReturn(expected);
+
+        //when
+        List<Company> actual = companyService.findAll();
+
+        //then
+        assertEquals(expected, actual);
+    }
+
 //    @Test
 //    public void should_return_created_company_when_create_given_repository() {
 //        //given
