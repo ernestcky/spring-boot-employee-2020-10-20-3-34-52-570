@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -34,7 +36,9 @@ public class EmployeeService {
     }
 
     public Employee findEmployee(String employeeId) {
-        return this.employeeRepository.findById(employeeId).orElseThrow(RuntimeException::new);
+        return this.employeeRepository.findById(employeeId).orElseThrow(() -> new ResponseStatusException(
+               HttpStatus.NOT_FOUND, "entity not found"
+       ));
     }
 
     public Employee update(String employeeId, Employee employeeUpdate) {
