@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -51,19 +52,20 @@ class CompanyServiceTest {
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    public void should_return_specified_company_when_get_given_repository_and_id() {
-//        //given
-//        Company expected = new Company();
-//
-//        when(companyRepository.findById(expected.getCompanyId())).thenReturn(expected);
-//
-//        //when
-//        Company actual = companyService.getCompany(expected.getCompanyId());
-//
-//        //then
-//        assertEquals(expected, actual);
-//    }
+    @Test
+    public void should_return_specified_company_when_get_given_repository_and_id() {
+        //given
+        Company expected = new Company();
+        expected.setCompanyId("1");
+
+        when(companyRepository.findById(expected.getCompanyId())).thenReturn(Optional.of(expected));
+
+        //when
+        Company actual = companyService.getCompany(expected.getCompanyId());
+
+        //then
+        assertEquals(expected, actual);
+    }
 //
 //    @Test
 //    public void should_return_employee_list_when_get_company_employee_given_company() {
