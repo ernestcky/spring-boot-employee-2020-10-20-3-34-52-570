@@ -1,34 +1,42 @@
 package com.thoughtworks.springbootemployee.controller;
 
+import com.thoughtworks.springbootemployee.dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.mapper.EmployeeMapper;
 import com.thoughtworks.springbootemployee.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-    @Autowired
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
+    private final EmployeeMapper employeeMapper;
+
+    public EmployeeController() {
+        this.employeeService = new EmployeeService();
+        this.employeeMapper = new EmployeeMapper();
+    }
 
     @GetMapping
-    public List<Employee> getAll() {
-        return this.employeeService.findAll();
+    public List<EmployeeResponse> getAll() {
+        return this.employeeService.findAll().stream().map(employeeMapper::toResponse).collect(Collectors.toList());
     }
 
     @GetMapping(params = {
-        "page",
-        "pageSize"
+            "page",
+            "pageSize"
     })
     public List<Employee> getAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
         return this.employeeService.findAll(page, pageSize);
     }
 
     @GetMapping(params = {
-        "gender"
+            "gender"
     })
     public List<Employee> getAll(@RequestParam("gender") String gender) {
         return this.employeeService.findAll(gender);
