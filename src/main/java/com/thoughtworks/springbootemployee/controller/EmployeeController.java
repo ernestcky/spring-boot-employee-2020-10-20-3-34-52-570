@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-    private final EmployeeService employeeService;
-    private final EmployeeMapper employeeMapper;
+    private EmployeeService employeeService;
+    private EmployeeMapper employeeMapper;
 
-    public EmployeeController() {
-        this.employeeService = new EmployeeService();
-        this.employeeMapper = new EmployeeMapper();
+    public EmployeeController(EmployeeService employeeService, EmployeeMapper employeeMapper) {
+        this.employeeService = employeeService;
+        this.employeeMapper = employeeMapper;
     }
 
     @GetMapping
