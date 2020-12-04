@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.services;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exceptions.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.exceptions.EmployeeNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
@@ -36,7 +37,10 @@ public class CompanyService {
 
     public List<Employee> getCompanyEmployees(String companyId) {
         // todo: check exist first
-        return this.employeeRepository.findAllByCompanyId(companyId);
+        if (this.companyRepository.existsById(companyId)) {
+            return this.employeeRepository.findAllByCompanyId(companyId);
+        }
+        else throw new CompanyNotFoundException("Company Not Found.");
     }
 
     public List<Company> findAll(int page, int pageSize) {

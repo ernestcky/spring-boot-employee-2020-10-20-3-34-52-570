@@ -82,11 +82,11 @@ class CompanyServiceTest {
         expected.add(new Employee());
 
         Company company = new Company();
-        company.setCompanyId("1");
 
         when(employeeRepository.findAllByCompanyId(company.getCompanyId())).thenReturn(expected);
+        when(companyRepository.existsById(company.getCompanyId())).thenReturn(true);
 
-        //when //todo: repo, go to given
+        //when
         companyService.create(company);
         List<Employee> actual = companyService.getCompanyEmployees(company.getCompanyId());
 
