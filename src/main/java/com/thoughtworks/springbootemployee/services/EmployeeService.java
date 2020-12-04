@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.services;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exceptions.EmployeeNotFoundException;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,9 +37,7 @@ public class EmployeeService {
     }
 
     public Employee findEmployee(String employeeId) {
-        return this.employeeRepository.findById(employeeId).orElseThrow(() -> new ResponseStatusException(
-               HttpStatus.NOT_FOUND, "entity not found"
-       ));
+        return this.employeeRepository.findById(employeeId).orElseThrow(() -> new EmployeeNotFoundException("Employee Not Found."));
     }
 
     public Employee update(String employeeId, Employee employeeUpdate) {
