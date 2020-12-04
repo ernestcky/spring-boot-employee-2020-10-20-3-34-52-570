@@ -32,15 +32,15 @@ public class EmployeeController {
             "page",
             "pageSize"
     })
-    public Page<Employee> getAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
-        return this.employeeService.findAll(page, pageSize);
+    public Page<EmployeeResponse> getAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
+        return this.employeeService.findAll(page, pageSize).map(employeeMapper::toResponse);
     }
 
     @GetMapping(params = {
             "gender"
     })
-    public List<Employee> getAll(@RequestParam("gender") String gender) {
-        return this.employeeService.findAll(gender);
+    public List<EmployeeResponse> getAll(@RequestParam("gender") String gender) {
+        return this.employeeService.findAll(gender).stream().map(employeeMapper::toResponse).collect(Collectors.toList());
     }
 
     @PostMapping
