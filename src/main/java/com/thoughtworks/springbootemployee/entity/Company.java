@@ -9,7 +9,7 @@ import java.util.List;
 
 @Document
 public class Company {
-    @Id
+    @MongoId(FieldType.OBJECT_ID)
     private String companyId;
     private String companyName;
     private Integer employeesNumber;

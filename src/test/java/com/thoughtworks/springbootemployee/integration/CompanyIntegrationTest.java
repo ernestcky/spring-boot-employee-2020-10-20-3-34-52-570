@@ -133,7 +133,7 @@ public class CompanyIntegrationTest {
         //given
         Company company = new Company("company1", 232);
         companyRepository.insert(company);
-
+        //todo: change name
         String employeeAsJson = "{\n" +
                 "    \"companyName\": \"company2\",\n" +
                 "    \"employeesNumber\": 345\n" +
@@ -152,7 +152,7 @@ public class CompanyIntegrationTest {
     @Test
     public void should_return_empty_list_when_delete_given_one_employee_in_list() throws Exception {
         //given
-        Integer expected = this.companyRepository.findAll().size();
+        Integer expected = this.companyRepository.findAll().size(); //todo: change to 0
         Company company = this.companyRepository.insert(new Company());
 
         //when

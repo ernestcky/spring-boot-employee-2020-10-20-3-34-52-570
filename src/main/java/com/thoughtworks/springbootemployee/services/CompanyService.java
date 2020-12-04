@@ -36,6 +36,7 @@ public class CompanyService {
     }
 
     public List<Employee> getCompanyEmployees(String companyId) {
+        // todo: check exist first
         return this.employeeRepository.findAllByCompanyId(companyId);
     }
 

@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import java.util.Arrays;
 import java.util.List;
@@ -104,7 +102,7 @@ public class EmployeeIntegrationTest {
         Employee employee4 = new Employee("Ernest4", 19, "Female", 1000);
         employeeRepository.saveAll(Arrays.asList(employee1, employee2, employee3, employee4));
 
-        //when
+        //when //todo: use param
         mockMvc.perform(get("/employees?page=2&pageSize=2"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Ernest3"))
@@ -160,7 +158,7 @@ public class EmployeeIntegrationTest {
                             .andExpect(jsonPath("$.salary").value(55555555));
     }
     
-    @Test
+    @Test //todo: set to 0
     public void should_return_empty_list_when_delete_given_one_employee_in_list() throws Exception {
         //given
         Integer expected = this.employeeRepository.findAll().size();
@@ -174,7 +172,7 @@ public class EmployeeIntegrationTest {
         //the
         assertEquals(expected, employees.size());
     }
-    
+
 
 
 }
