@@ -32,7 +32,7 @@ public class CompanyService {
     }
 
     public Company getCompany(String companyId) {
-        return this.companyRepository.findById(companyId).orElseThrow(() -> new EmployeeNotFoundException("Employee Not Found."));
+        return this.companyRepository.findById(companyId).orElseThrow(() -> new CompanyNotFoundException("Company Not Found."));
     }
 
     public List<Employee> getCompanyEmployees(String companyId) {
