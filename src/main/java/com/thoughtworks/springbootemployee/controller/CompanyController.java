@@ -9,6 +9,7 @@ import com.thoughtworks.springbootemployee.services.CompanyService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/companies")
@@ -22,8 +23,8 @@ public class CompanyController {
     }
 
     @GetMapping
-    public List<Company> findAll() {
-        return this.companyService.findAll();
+    public List<CompanyResponse> findAll() {
+        return this.companyService.findAll().stream().map(companyMapper::toResponse).collect(Collectors.toList());
     }
 
     @PostMapping
