@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.services;
 
+import com.thoughtworks.springbootemployee.dto.CompanyResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
@@ -105,7 +107,7 @@ class CompanyServiceTest {
         when(companyRepository.findAll((Pageable)any())).thenReturn(new PageImpl<>(expected));
 
         //when
-        List<Company> actual = companyService.findAll(2, 2);
+        List<Company> actual = companyService.findAll(2, 2).toList();
 
         //then
         assertEquals(expected, actual);

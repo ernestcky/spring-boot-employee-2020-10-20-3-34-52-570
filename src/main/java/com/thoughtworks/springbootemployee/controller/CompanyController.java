@@ -8,6 +8,7 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.mapper.CompanyMapper;
 import com.thoughtworks.springbootemployee.mapper.EmployeeMapper;
 import com.thoughtworks.springbootemployee.services.CompanyService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,8 +51,8 @@ public class CompanyController {
             "page",
             "pageSize"
     })
-    public List<Company> getAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
-        return this.companyService.findAll(page, pageSize);
+    public Page<CompanyResponse> getAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
+        return this.companyService.findAll(page, pageSize).map(companyMapper::toResponse);
     }
 
     @PutMapping("/{companyId}")

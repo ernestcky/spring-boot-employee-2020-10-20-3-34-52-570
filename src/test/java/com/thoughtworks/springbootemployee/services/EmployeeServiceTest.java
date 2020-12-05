@@ -108,11 +108,10 @@ class EmployeeServiceTest {
                 new Employee("3", null, null, "F", null),
                 new Employee("4", null, null, "F", null)
         );
-
         when(employeeRepository.findAll((Pageable)any())).thenReturn(new PageImpl<>(expected));
 
         //when
-        Page<Employee> actual = employeeService.findAll(2, 2);
+        List<Employee> actual = employeeService.findAll(2, 2).toList();
 
         //then
         assertEquals(expected, actual);

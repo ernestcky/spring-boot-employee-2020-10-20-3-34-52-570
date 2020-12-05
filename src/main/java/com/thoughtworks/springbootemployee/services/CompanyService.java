@@ -7,6 +7,7 @@ import com.thoughtworks.springbootemployee.exceptions.EmployeeNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -43,9 +44,9 @@ public class CompanyService {
         else throw new CompanyNotFoundException("Company Not Found.");
     }
 
-    public List<Company> findAll(int page, int pageSize) {
+    public Page<Company> findAll(int page, int pageSize) {
         Pageable pageable = PageRequest.of(page - 1, pageSize);
-        return this.companyRepository.findAll(pageable).toList();
+        return this.companyRepository.findAll(pageable);
     }
 
     public Company update(String companyId, Company companyUpdate) {
