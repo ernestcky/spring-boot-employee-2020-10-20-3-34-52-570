@@ -112,9 +112,14 @@ public class CompanyIntegrationTest {
     @Test
     public void should_return_not_found_status_when_get_company_given_invalid_id() throws Exception {
         //when
-        Random rand = new Random();
-        String randomHexNumber = Integer.toHexString(rand.nextInt(100));
-        mockMvc.perform(get("/companies/" + randomHexNumber))
+        Company company = new Company("company", 2020);
+        companyRepository.insert(company);
+
+        String id = company.getCompanyId();
+
+        companyRepository.deleteById(id);
+
+        mockMvc.perform(get("/companies/" + id))
                 .andExpect(status().isNotFound());
     }
 
