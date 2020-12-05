@@ -1,6 +1,5 @@
 package com.thoughtworks.springbootemployee.advice;
 
-import com.thoughtworks.springbootemployee.advice.ErrorMessage.ErrorMessage;
 import com.thoughtworks.springbootemployee.advice.ErrorMessage.ErrorResponse;
 import com.thoughtworks.springbootemployee.exceptions.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.exceptions.EmployeeNotFoundException;
