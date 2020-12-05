@@ -37,6 +37,14 @@ public class Company {
         return companyName;
     }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setEmployeesNumber(Integer employeesNumber) {
+        this.employeesNumber = employeesNumber;
+    }
+
     public Integer getEmployeesNumber() {
         return employeesNumber;
     }
