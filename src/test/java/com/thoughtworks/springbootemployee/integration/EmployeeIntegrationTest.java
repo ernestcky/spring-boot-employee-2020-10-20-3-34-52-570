@@ -105,8 +105,8 @@ public class EmployeeIntegrationTest {
         //when //todo: use param
         mockMvc.perform(get("/employees?page=2&pageSize=2"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name").value("Ernest3"))
-                .andExpect(jsonPath("$", hasSize(2)));
+                .andExpect(jsonPath("$.content[0].name").value("Ernest3"))
+                .andExpect(jsonPath("$.content", hasSize(2)));
     }
 
 

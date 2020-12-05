@@ -114,7 +114,7 @@ public class CompanyIntegrationTest {
         //when
         Random rand = new Random();
         String randomHexNumber = Integer.toHexString(rand.nextInt(100));
-        mockMvc.perform(get("/companies/5fcbbcaf9a6ff9e24445a651"))
+        mockMvc.perform(get("/companies/" + randomHexNumber))
                 .andExpect(status().isNotFound());
     }
 
