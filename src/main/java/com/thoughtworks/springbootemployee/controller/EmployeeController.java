@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.controller;
 
+import com.thoughtworks.springbootemployee.dto.EmployeeRequest;
 import com.thoughtworks.springbootemployee.dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.mapper.EmployeeMapper;
@@ -44,8 +45,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee create(@RequestBody Employee employee) {
-        return this.employeeService.create(employee);
+    public EmployeeResponse create(@RequestBody EmployeeRequest employeeRequest) {
+        return this.employeeMapper.toResponse(this.employeeService.create(employeeMapper.toEntity(employeeRequest)));
     }
 
     @PutMapping("/{employeeId}")
