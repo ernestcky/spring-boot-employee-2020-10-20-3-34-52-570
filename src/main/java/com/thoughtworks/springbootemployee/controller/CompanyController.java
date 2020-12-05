@@ -33,8 +33,8 @@ public class CompanyController {
     }
 
     @GetMapping("/{companyId}")
-    public Company getCompany(@PathVariable String companyId) {
-        return this.companyService.getCompany(companyId);
+    public CompanyResponse getCompany(@PathVariable String companyId) {
+        return this.companyMapper.toResponse(this.companyService.getCompany(companyId));
     }
 
     @GetMapping("/{companyId}/employees")
