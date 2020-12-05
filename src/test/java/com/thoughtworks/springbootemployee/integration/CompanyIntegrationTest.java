@@ -9,10 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -110,7 +112,9 @@ public class CompanyIntegrationTest {
     @Test
     public void should_return_not_found_status_when_get_company_given_invalid_id() throws Exception {
         //when
-        mockMvc.perform(get("/companies/123"))
+        Random rand = new Random();
+        String randomHexNumber = Integer.toHexString(rand.nextInt(100));
+        mockMvc.perform(get("/companies/5fcbbcaf9a6ff9e24445a651"))
                 .andExpect(status().isNotFound());
     }
 
