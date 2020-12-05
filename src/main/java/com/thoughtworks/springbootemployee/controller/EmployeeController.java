@@ -61,7 +61,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{employeeId}")
-    public Employee findEmployee(@PathVariable String employeeId) {
-        return this.employeeService.findEmployee(employeeId);
+    public EmployeeResponse findEmployee(@PathVariable String employeeId) {
+        return this.employeeMapper.toResponse(this.employeeService.findEmployee(employeeId));
     }
 }
